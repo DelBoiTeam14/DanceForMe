@@ -15,7 +15,7 @@
 
 <div align="center">
   <h1 align="center">Dance for Me! </h1>
-    <img src="assets/asset_README/banner.png" alt="Logo" width="" height="">
+    <img src="asset_README/banner.png" alt="Logo" width="" height="">
   
   <p align="center">
     Let's Dance in Computer Science Building Together!
@@ -53,11 +53,11 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 <div style="display:flex; justify-content:center;">
-  <img src="assets/asset_README/demo1.png" width="200" />
-  <img src="assets/asset_README/demo2.png" width="200" />
-  <img src="assets/asset_README/demo5.png" width="200" />
-  <img src="assets/asset_README/demo3.png" width="200" />
-  <img src="assets/asset_README/demo4.png" width="200" />
+  <img src="asset_README/demo1.png" width="200" />
+  <img src="asset_README/demo2.png" width="200" />
+  <img src="asset_README/demo5.png" width="200" />
+  <img src="asset_README/demo3.png" width="200" />
+  <img src="asset_README/demo4.png" width="200" />
 </div>
 
 Dance for Me is an interactive AR experience in which players mimic a variety of dances performed by 3D model animations with real time feedback. The motivation behind this project lies in encouraging desk-bound computer scientists to get up and dance. Dance for Me was built to interact with users and embodies serendipitous exertion to encourage participants to engage. This gives our avatar ‘Delboi’ a human like feel which is an objective that we strived to achieve. 
