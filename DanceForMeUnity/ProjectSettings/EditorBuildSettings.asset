@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/IdleMode.unity
+    guid: 9cf475694ffe5704ebb057efd2d22f83
+  - enabled: 1
+    path: Assets/Scenes/IntroMenu.unity
+    guid: 09b01d7462c3cc9419c61498b9dececd
+  - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: cbf7d7792b40542e58675335d15772ad
+  - enabled: 1
+    path: Assets/Scenes/DanceMenu.unity
+    guid: 79b6969bd0a67594982ea1d8aaf64257
+  - enabled: 1
+    path: Assets/Scenes/0DanceScene.unity
+    guid: 96f7c893a2c7b47a287decf77f2e0204
+  - enabled: 1
+    path: Assets/Scenes/1DanceScene.unity
+    guid: 098970af0813b4db5b010e49e04012c4
+  - enabled: 1
+    path: Assets/Scenes/2DanceScene.unity
+    guid: fcf4602859322744a87afc564c85edc5
+  - enabled: 1
+    path: Assets/Scenes/PictureScene.unity
+    guid: 46c4361fcb6d1e24b9d0eac34ab9d3de
+  - enabled: 1
+    path: Assets/Scenes/ScoreBoard.unity
+    guid: 6954ceaf36c14bd4fa6015723363f2c1
+  m_configObjects: {}
