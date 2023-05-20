@@ -2,3 +2,4 @@ DanceForMeExe/DanceForMeUnity_Data/sharedassets0.assets filter=lfs diff=lfs merg
 Library/Artifacts/17/17838f4ad85bc67718249107eef60737 filter=lfs diff=lfs merge=lfs -text
 Library/Artifacts/36/368d3203eb86e895b164356606b8e774 filter=lfs diff=lfs merge=lfs -text
 Library/Artifacts/d2/d2068d477609f184467abbee81bf466b filter=lfs diff=lfs merge=lfs -text
+Library/PlayerDataCache/Win64/Data/sharedassets0.assets filter=lfs diff=lfs merge=lfs -text
