@@ -1,0 +1,57 @@
+fileFormatVersion: 2
+guid: da0becaf69ab7974397c633bf47588b6
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Animation
+    second: {fileID: 7400000, guid: 794e7f5df1087de488c9e5b4ac6d0930, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Color-light
+    second: {fileID: 2100000, guid: 6343d8c2547eafd48863d019235e62dc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Color-light.001
+    second: {fileID: 2100000, guid: 3421d65df313cf140916636e34fecf99, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Color-light.002
+    second: {fileID: 2100000, guid: 828d4a72b993a4c4c82721c951dc211b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Color-light.003
+    second: {fileID: 2100000, guid: 2b0a929a700bed04db6f4a70e42fa69a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Color-light.004
+    second: {fileID: 2100000, guid: 7e0f4d157ad320e439b2da2c7144f751, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Color-light.005
+    second: {fileID: 2100000, guid: 39b737bd03c67a449b369f8abebd2621, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Plast
+    second: {fileID: 2100000, guid: c64c168c2c15ee24fbf3878b6a8dcb86, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: totalmetal
+    second: {fileID: 2100000, guid: 2e72094513ad5864e9eb4c6ea9eec496, type: 2}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: cc45016b844e7624dae3aec10fb443ea, type: 3}
+  reverseAxis: 0
+  renderPipeline: 0
