@@ -151,6 +151,7 @@ To learn more about our project : [Requirements and Specification](assets/projec
 Many thanks to all resources below! :)
 
 * [README template](https://github.com/othneildrew/Best-README-Template)
+* [GitHub issues template](https://github.com/Polymer/polymer)
 * [Unity Icon](https://cdn-icons-png.flaticon.com/512/5969/5969294.png)
 
 
