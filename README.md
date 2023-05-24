@@ -126,7 +126,7 @@ Macintosh devices will be supported in the near future.
 
 1. Clone the repo
    ```sh
-   git clone https://projects.cs.nott.ac.uk/comp2002/2022-2023/team14_project.git
+   git clone https://github.com/BraxWong/DanceForMe.git 
    ```
 2. Run start.bat file
    
