@@ -18,7 +18,7 @@
     <img src="asset_README/banner.png" alt="Logo" width="" height="">
   
   <p align="center">
-    Let's Dance in Computer Science Building Together!
+    Let's Dance together!
   </p>
 </div>
 
@@ -120,6 +120,9 @@ Install Python Version 3.8 on its official website
 ### Installation
 
 _Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
+
+Caution: Please make sure that you are operating the DanceForMe interactive system using a windows device since it is the sole supported operating system thus far. 
+Macintosh devices will be supported in the near future.
 
 1. Clone the repo
    ```sh
