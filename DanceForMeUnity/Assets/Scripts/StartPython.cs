@@ -5,7 +5,9 @@ using System.Diagnostics;
 using System.ComponentModel;
 using System.Threading;
 using System.IO;
-//FIXME: Should delete this when the project is done esting.
+/// <summary>
+/// Class <c>StartPython</c> is used to test out python scripts without building executable every time
+/// </summary>
 public class StartPython : MonoBehaviour
 {
     static string mainPath;
@@ -29,6 +31,11 @@ public class StartPython : MonoBehaviour
         thread.Start();
     }
 
+    /// <summary>
+    /// This method is used to call the python script specified by the Unity Editor. It will start a process using
+    /// window command prompt 
+    /// </summary>
+    /// <param name="input">The file name of the python script</param>
     static void Command(string input)
     {
         var processInfo = new ProcessStartInfo();
