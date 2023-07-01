@@ -1,5 +1,7 @@
 import subprocess
-
+import platform
+import stat
+import os
 # This Python script will only be run once. Since the game will loop back to the IdleMode Scene after the
 # leaderboard scene. You don't want to loop back to start.bat file since it will open up another instance
 # of the unity project. In order to avoid that. This should be run instead of PersonDetect.py for the first
@@ -13,4 +15,9 @@ import subprocess
 
 
 message = "Starting PersonDetect.py"
-subprocess.run(["PersonDetect.bat", message])
+if platform.system() == "Darwin":
+    st = os.stat("PersonDetect.sh")
+    os.chmod("PersonDetect.sh",st.st_mode | stat.S_IEXEC)
+    subprocess.call("./PersonDetect.sh")
+else:
+    subprocess.run(["PersonDetect.bat", message])

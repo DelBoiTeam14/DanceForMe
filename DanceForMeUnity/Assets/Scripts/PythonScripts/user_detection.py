@@ -1,8 +1,6 @@
 import cv2
 import mediapipe as mp
 import time
-import UnityEngine as ue
-import SendingCS as SCS
 #DOWNLOAD DEPENDENCIES USING THE FOLLOWING COMMAND
 # pip install -r requirements.txt
 mp_drawing = mp.solutions.drawing_utils
@@ -33,7 +31,6 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
             # If the user is not here
             # results.pose_landmarks will output none
             if results.pose_landmarks:
-                SCS.sendingData("True")
                 break
 
 
