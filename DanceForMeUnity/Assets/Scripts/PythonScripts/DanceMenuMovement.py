@@ -5,13 +5,13 @@ import sys
 import numpy as np
 import mediapipe as mp
 import os
-os.environ["OPENCV_VIDEOIO_MSMF_ENABLE_HW_TRANSFORMS"] = "0"
+import OSCheck
 import cv2
 from pythonosc import udp_client
 import Reset
 from datetime import datetime, timedelta
 
-
+print("Starting DanceMenuMovement.py")
 client = udp_client.SimpleUDPClient("127.0.0.1", 6969)
 
 def buildMessage(result):
@@ -40,7 +40,7 @@ def calculate_angle(a, b, c):
 
 
 
-cap = cv2.VideoCapture(0 + cv2.CAP_DSHOW)
+cap = cv2.VideoCapture(0)
 # Getting the width and height of the video
 width = cap.get(3)
 height = cap.get(4)
@@ -50,7 +50,6 @@ selected = False
 with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
     while datetime.now() < end_time:
 
-        #vc.record()
         ret, frame = cap.read()
 
         image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
@@ -140,10 +139,10 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
         if cv2.waitKey(10) & 0xFF == ord('q'):
             break
 
-subprocess.run(["DanceScene.bat", str(danceID)])
 cap.release()
 cv2.destroyAllWindows()
-#User is no longer here
+if selected:
+    OSCheck.checkOS("DanceScene",str(danceID))
 if not selected:
     Reset.reset()
 

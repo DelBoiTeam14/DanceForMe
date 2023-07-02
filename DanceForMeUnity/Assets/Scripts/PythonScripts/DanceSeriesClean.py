@@ -1,6 +1,5 @@
 import os
 
-os.environ["OPENCV_VIDEOIO_MSMF_ENABLE_HW_TRANSFORMS"] = "0"
 import cv2
 import numpy as np
 import mediapipe as mp
@@ -15,7 +14,7 @@ time.sleep(3)
 # Importing All Necessary Libraries and Functions
 danceID = "0"  # sys.argv[1]
 
-cap = cv2.VideoCapture(0 + cv2.CAP_DSHOW)
+cap = cv2.VideoCapture(0)
 # Getting the width and height of the video
 width = cap.get(3)
 height = cap.get(4)
