@@ -1,19 +1,20 @@
-import numpy as np
-import mediapipe as mp
 import os
-os.environ["OPENCV_VIDEOIO_MSMF_ENABLE_HW_TRANSFORMS"] = "0"
+
+import mediapipe as mp
+import numpy as np
+
 import cv2
 from pythonosc import udp_client
-import subprocess
-import sys
 from datetime import datetime, timedelta
 import Reset
+import OSCheck
+import sys
 
 client = udp_client.SimpleUDPClient("127.0.0.1", 6969)
-
 def buildMessage(result):
     msg = result
     return msg
+
 
 nodCount = 0
 nose1 = 0
@@ -22,10 +23,13 @@ firstFrame = False
 mp_drawing = mp.solutions.drawing_utils
 mp_pose = mp.solutions.pose
 posed = False
+
+
 def jumpTest(landmarkList):
     if (landmarkList[0].y * 480) < 80:
         return True
     return False
+
 
 def calculate_angle(a, b, c):
     a = np.array(a)
@@ -41,15 +45,14 @@ def calculate_angle(a, b, c):
     return angle
 
 
-
-cap = cv2.VideoCapture(0 + cv2.CAP_DSHOW)
+cap = cv2.VideoCapture(0)
 # Getting the width and height of the video
 width = cap.get(3)
 height = cap.get(4)
 end_time = datetime.now() + timedelta(seconds=30)
 with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
-    while cap.isOpened: 
-        #vc.record()
+    while cap.isOpened:
+
         ret, frame = cap.read()
 
         image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
@@ -81,7 +84,6 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
             right_hip = [landmarks[mp_pose.PoseLandmark.RIGHT_HIP.value].x,
                          landmarks[mp_pose.PoseLandmark.RIGHT_HIP.value].y]
 
-
             if firstFrame == False:
                 # nose0 = landmarks[mp_pose.PoseLandmark.NOSE.value].y
                 firstFrame = True
@@ -102,9 +104,7 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
             nose1 = nose0
             if (80 < tpose_left < 110) and (80 < tpose_right < 110):
                 gesture = "T-POSE"
-                print(gesture)
-                client.send_message("/UserDetected", buildMessage("T-POSE"))#can delete build message
-                subprocess.run(["TNC.bat", "TNC"])
+                client.send_message("/UserDetected", buildMessage("T-POSE"))
                 posed = True
                 break
         except:
@@ -115,5 +115,7 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
 
     cap.release()
     cv2.destroyAllWindows()
-    if not posed:
+    if posed:
+        OSCheck.checkOS("TNC", "TNC")
+    else:
         Reset.reset()

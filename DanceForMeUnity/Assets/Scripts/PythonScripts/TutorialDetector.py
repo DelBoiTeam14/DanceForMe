@@ -1,5 +1,4 @@
 import os
-os.environ["OPENCV_VIDEOIO_MSMF_ENABLE_HW_TRANSFORMS"] = "0"
 import cv2
 import numpy as np
 import mediapipe as mp
@@ -7,6 +6,7 @@ from pythonosc import udp_client
 import subprocess
 from datetime import datetime, timedelta
 import Reset
+import OSCheck
 
 firstFrame = False
 leftDetected = False
@@ -16,7 +16,7 @@ mp_pose = mp.solutions.pose
 posed = False
 
 client = udp_client.SimpleUDPClient("127.0.0.1", 6969)
-
+print("Starting Tutorial.py")
 def buildMessage(result):
     msg = result
     return msg
@@ -34,7 +34,7 @@ def calculate_angle(a, b, c):
 
     return angle
 
-cap = cv2.VideoCapture(0 + cv2.CAP_DSHOW)
+cap = cv2.VideoCapture(0)
 end_time = datetime.now() + timedelta(seconds=60)
 with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
     while datetime.now() < end_time:
@@ -86,15 +86,16 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
             if (80 < tpose_left < 110) and (80 < tpose_right < 110):
                 if leftDetected and rightDetected:
                     client.send_message("/UserDetected", buildMessage("TPOSE"))  # can delete build message
-                    subprocess.run(["DanceMenu.bat", "Success"])
                     posed = True
                     break
             elif (80 < tpose_left < 110):
-                if not leftDetected:
+                if rightDetected and not leftDetected:
+                    print("Left")
                     client.send_message("/UserDetected", buildMessage("LEFT"))
                     leftDetected = True
             elif (80 < tpose_right < 110):
-                if not leftDetected:
+                if not rightDetected:
+                    print("Right")
                     client.send_message("/UserDetected", buildMessage("RIGHT"))
                     rightDetected = True
 
@@ -107,5 +108,7 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
 
     cap.release()
     cv2.destroyAllWindows()
+    if posed:
+        OSCheck.checkOS("DanceMenu","TNC")
     if not posed:
         Reset.reset()
