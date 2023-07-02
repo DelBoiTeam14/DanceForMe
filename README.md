@@ -92,7 +92,6 @@ With aims to ...
 To get started, you will need to have the following prerequisites.
 
 ### Prerequisites
-You are using a window machine
 
 Install Python Version 3.8 on its official website 
 * Python 3.8
@@ -121,8 +120,7 @@ Install Python Version 3.8 on its official website
 
 Please follow the instructions down below to install the interactive system.
 
-Caution: Please make sure that you are operating the DanceForMe interactive system using a windows device since it is the sole supported operating system thus far. 
-Macintosh devices will be supported in the near future.
+## Windows Users
 
 1. Clone the repo
    ```sh
@@ -132,6 +130,25 @@ Macintosh devices will be supported in the near future.
    
 3. Enjoy :)
 
+## Mac Users
+
+1. Clone the repo
+   ```sh
+   git clone https://github.com/BraxWong/DanceForMe.git 
+   ```
+   
+2. Download MacDanceForMe.zip from our release page
+   ```sh
+   https://github.com/DelBoiTeam14/DanceForMe/releases/tag/MacVersion1.0.0
+   ```
+   
+3. Move MacDanceForMe.zip to the DanceForMeExe folder and unzip it
+4. Run the start.sh bash script from the BashFiles folder by typing in the following command using the terminal
+   ```sh
+   ./start.sh
+   ```
+   
+5. Enjoy :) 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
