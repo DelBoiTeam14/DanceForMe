@@ -1,12 +1,10 @@
-import os
 import cv2
-import numpy as np
 import mediapipe as mp
 from pythonosc import udp_client
-import subprocess
 from datetime import datetime, timedelta
 import Reset
 import OSCheck
+import AngleCalculation
 
 firstFrame = False
 leftDetected = False
@@ -16,23 +14,6 @@ mp_pose = mp.solutions.pose
 posed = False
 
 client = udp_client.SimpleUDPClient("127.0.0.1", 6969)
-print("Starting Tutorial.py")
-def buildMessage(result):
-    msg = result
-    return msg
-
-def calculate_angle(a, b, c):
-    a = np.array(a)
-    b = np.array(b)
-    c = np.array(c)
-
-    radians = np.arctan2(c[1] - b[1], c[0] - b[0]) - np.arctan2(a[1] - b[1], a[0] - b[0])
-    angle = np.abs(radians * 180.0 / np.pi)
-
-    if angle > 180.0:
-        angle = 360 - angle
-
-    return angle
 
 cap = cv2.VideoCapture(0)
 end_time = datetime.now() + timedelta(seconds=60)
@@ -69,39 +50,40 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
             right_hip = [landmarks[mp_pose.PoseLandmark.RIGHT_HIP.value].x,
                          landmarks[mp_pose.PoseLandmark.RIGHT_HIP.value].y]
 
-            left_wrist = [landmarks[mp_pose.PoseLandmark.LEFT_WRIST.value].x, landmarks[mp_pose.PoseLandmark.LEFT_WRIST.value].y]
-            right_wrist = [landmarks[mp_pose.PoseLandmark.RIGHT_WRIST.value].x, landmarks[mp_pose.PoseLandmark.RIGHT_WRIST.value].y]
+            left_wrist = [landmarks[mp_pose.PoseLandmark.LEFT_WRIST.value].x,
+                          landmarks[mp_pose.PoseLandmark.LEFT_WRIST.value].y]
+            right_wrist = [landmarks[mp_pose.PoseLandmark.RIGHT_WRIST.value].x,
+                           landmarks[mp_pose.PoseLandmark.RIGHT_WRIST.value].y]
 
-            left_knee = [landmarks[mp_pose.PoseLandmark.LEFT_KNEE.value].x, landmarks[mp_pose.PoseLandmark.LEFT_KNEE.value].y]
-            right_leg = [landmarks[mp_pose.PoseLandmark.RIGHT_KNEE.value].x, landmarks[mp_pose.PoseLandmark.RIGHT_KNEE.value].y]
-
+            left_knee = [landmarks[mp_pose.PoseLandmark.LEFT_KNEE.value].x,
+                         landmarks[mp_pose.PoseLandmark.LEFT_KNEE.value].y]
+            right_leg = [landmarks[mp_pose.PoseLandmark.RIGHT_KNEE.value].x,
+                         landmarks[mp_pose.PoseLandmark.RIGHT_KNEE.value].y]
 
             # Calculating angles and storing them to be processed
 
-            tpose_left = calculate_angle(left_hip, left_shoulder, left_elbow)
-            tpose_right = calculate_angle(right_hip, right_shoulder, right_elbow)
-
+            tpose_left = AngleCalculation.calculate_angle(left_hip, left_shoulder, left_elbow)
+            tpose_right = AngleCalculation.calculate_angle(right_hip, right_shoulder, right_elbow)
 
             # Pose Recognition Logic
             if (80 < tpose_left < 110) and (80 < tpose_right < 110):
                 if leftDetected and rightDetected:
-                    client.send_message("/UserDetected", buildMessage("TPOSE"))  # can delete build message
+                    client.send_message("/UserDetected", "TPOSE")
                     posed = True
                     break
-            elif (80 < tpose_left < 110):
+            elif 80 < tpose_left < 110:
                 if rightDetected and not leftDetected:
                     print("Left")
-                    client.send_message("/UserDetected", buildMessage("LEFT"))
+                    client.send_message("/UserDetected", "LEFT")
                     leftDetected = True
-            elif (80 < tpose_right < 110):
+            elif 80 < tpose_right < 110:
                 if not rightDetected:
                     print("Right")
-                    client.send_message("/UserDetected", buildMessage("RIGHT"))
+                    client.send_message("/UserDetected", "RIGHT")
                     rightDetected = True
 
         except:
             pass
-
 
         if cv2.waitKey(10) & 0xFF == ord('q'):
             break
@@ -109,6 +91,6 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
     cap.release()
     cv2.destroyAllWindows()
     if posed:
-        OSCheck.checkOS("DanceMenu","TNC")
+        OSCheck.checkOS("DanceMenu", "TNC")
     if not posed:
         Reset.reset()

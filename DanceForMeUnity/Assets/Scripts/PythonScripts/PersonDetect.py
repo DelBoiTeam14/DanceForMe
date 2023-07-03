@@ -1,14 +1,10 @@
-import os
-
 import mediapipe as mp
-import numpy as np
-
 import cv2
 from pythonosc import udp_client
 from datetime import datetime, timedelta
 import Reset
 import OSCheck
-import sys
+import AngleCalculation
 
 client = udp_client.SimpleUDPClient("127.0.0.1", 6969)
 def buildMessage(result):
@@ -31,19 +27,6 @@ def jumpTest(landmarkList):
     return False
 
 
-def calculate_angle(a, b, c):
-    a = np.array(a)
-    b = np.array(b)
-    c = np.array(c)
-
-    radians = np.arctan2(c[1] - b[1], c[0] - b[0]) - np.arctan2(a[1] - b[1], a[0] - b[0])
-    angle = np.abs(radians * 180.0 / np.pi)
-
-    if angle > 180.0:
-        angle = 360 - angle
-
-    return angle
-
 
 cap = cv2.VideoCapture(0)
 # Getting the width and height of the video
@@ -65,7 +48,6 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
 
         try:
             landmarks = results.pose_landmarks.landmark
-            # nose1 = landmarks[mp_pose.PoseLandmark.NOSE.value].y * height
             # Settings and initialising landmarks to be calculated / taken in
             # Could be written as functions using for sequences of dance moves
 
@@ -84,18 +66,15 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
             right_hip = [landmarks[mp_pose.PoseLandmark.RIGHT_HIP.value].x,
                          landmarks[mp_pose.PoseLandmark.RIGHT_HIP.value].y]
 
-            if firstFrame == False:
-                # nose0 = landmarks[mp_pose.PoseLandmark.NOSE.value].y
+            if not firstFrame:
                 firstFrame = True
 
             nose0 = landmarks[mp_pose.PoseLandmark.NOSE.value].y * height
 
-            # nose2 = [landmarks[mp_pose.PoseLandmark.NOSE.value].y]
-
             # Calculating angles and storing them to be processed
 
-            tpose_left = calculate_angle(left_hip, left_shoulder, left_elbow)
-            tpose_right = calculate_angle(right_hip, right_shoulder, right_elbow)
+            tpose_left = AngleCalculation.calculate_angle(left_hip, left_shoulder, left_elbow)
+            tpose_right = AngleCalculation.calculate_angle(right_hip, right_shoulder, right_elbow)
 
             # Setting and displaying properties for angles to be displayed on screen
 
